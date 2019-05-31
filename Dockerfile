@@ -4,7 +4,6 @@ WORKDIR /app
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY simplecalc/*.csproj ./simplecalc/
-RUN dotnet restore
 
 # copy everything else and build app
 COPY simplecalc/. ./simplecalc/
