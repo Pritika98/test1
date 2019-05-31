@@ -31,7 +31,6 @@ stages:
     - task: VSBuild@1
       inputs:
         solution: '**\*.sln'
-        vsVersion: '15.0'
     - task: VSTest@2
       inputs:
         testSelector: 'testAssemblies'
