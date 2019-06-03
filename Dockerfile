@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
@@ -11,7 +11,7 @@ WORKDIR /app/simplecalc
 RUN dotnet publish -c Release -o out
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+FROM microsoft/dotnet:2.1-sdk AS runtime
 WORKDIR /app
 COPY --from=build /app/simplecalc/out ./
 ENTRYPOINT ["dotnet", "simplecalc.dll"]
