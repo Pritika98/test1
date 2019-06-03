@@ -15,4 +15,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
 COPY --from=build /app/simplecalc/out ./
 #ENTRYPOINT ["dotnet", "simplecalc.dll"]
-ENTRYPOINT ["dotnet test"]
+ENTRYPOINT ["dotnet", "test"]
