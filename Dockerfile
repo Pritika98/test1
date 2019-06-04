@@ -1,17 +1,25 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
-WORKDIR /app
+FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base 
+WORKDIR /app 
+EXPOSE 80 
+EXPOSE 443
 
-# copy csproj and restore as distinct layers
-COPY *.sln .
-COPY simplecalc/*.csproj ./simplecalc/
+FROM microsoft/dotnet:2.1-sdk AS build 
+WORKDIR /src 
+COPY ["simplecalc/simplecalc.csproj", "simplecalc/"] 
+COPY ["UnitTestProject1/UnitTestProject1.csproj", "UnitTestProject1/"] 
+RUN dotnet restore "simplecalc/simplecalc.csproj" 
+RUN dotnet restore "UnitTestProject1/UnitTestProject1.csproj" 
+COPY . . 
+RUN dotnet build "simplecalc/simplecalc.csproj" -c Release -o /app 
+RUN dotnet build "UnitTestProject1/UnitTestProject1.csproj" -c Release -o /app 
 
-# copy everything else and build app
-COPY simplecalc/. ./simplecalc/
-WORKDIR /app/simplecalc
-RUN dotnet publish -c Release -o out
+RUN dotnet test "UnitTestProject1/UnitTestProject1.csproj" --logger "trx;LogFileName=simplecalc.trx" 
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS runtime
-WORKDIR /app
-COPY --from=build /app/simplecalc/out ./
+FROM build AS publish 
+RUN dotnet publish "simplecalc.csproj" -c Release -o /app 
+RUN dotnet publish "UnitTestProject1.csproj" -c Release -o /app 
+
+FROM base AS final 
+WORKDIR /app 
+COPY --from=publish /app . 
 ENTRYPOINT ["dotnet", "simplecalc.dll"]
-#ENTRYPOINT ["dotnet", "test"]
