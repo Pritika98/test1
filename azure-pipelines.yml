@@ -37,11 +37,6 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-    - task: VSTest@2
-      inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: '**/ *.dll'
-        searchFolder: '$(System.DefaultWorkingDirectory)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
