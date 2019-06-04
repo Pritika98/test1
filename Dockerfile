@@ -7,10 +7,10 @@ COPY ["UnitTestProject1/UnitTestProject1.csproj", "UnitTestProject1/"]
 COPY simplecalc/. ./simplecalc/
 COPY UnitTestProject1/. ./UnitTestProject1/
 WORKDIR /app/simplecalc
-RUN dotnet build "simplecalc/simplecalc.csproj" -c Release -o /app 
+RUN dotnet build "simplecalc.csproj" -c Release -o /app 
 RUN dotnet publish "simplecalc.csproj" -c Release -o
 WORKDIR /app/UnitTestProject1
-RUN dotnet build "UnitTestProject1/UnitTestProject1.csproj" -c Release -o /app 
+RUN dotnet build "UnitTestProject1.csproj" -c Release -o /app 
 RUN dotnet publish "UnitTestProject1.csproj" -c Release -o
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS runtime
