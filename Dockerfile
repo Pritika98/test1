@@ -16,10 +16,10 @@ RUN dotnet build "UnitTestProject1/UnitTestProject1.csproj" -c Release -o /app
 RUN dotnet test "UnitTestProject1/UnitTestProject1.csproj" --logger "trx;LogFileName=simplecalc.trx" 
 
 FROM build AS publish 
-RUN dotnet publish "simplecalc.csproj" -c Release -o /app 
-RUN dotnet publish "UnitTestProject1.csproj" -c Release -o /app 
+RUN dotnet publish -c Release -o /app
 
 FROM base AS final 
 WORKDIR /app 
 COPY --from=publish /app . 
 ENTRYPOINT ["dotnet", "simplecalc.dll"]
+#ENTRYPOINT ["dotnet", "test", "--logger:trx"]
