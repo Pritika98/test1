@@ -14,8 +14,8 @@ COPY .* ./
 #FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS runtime
 #WORKDIR /app
 #COPY --from=build /app/simplecalc/out ./
-ENTRYPOINT ["dotnet", "simplecalc.dll"]
-
+#ENTRYPOINT ["dotnet", "simplecalc.dll"]
+ENTRYPOINT ["echo", "hello"]
 #FROM build AS testrunner
 #WORKDIR /app/test
 #COPY UnitTestProject1/. .
