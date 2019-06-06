@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
-COPY *.* .
+COPY *.* ./
 
 #WORKDIR /app/simplecalc
 #RUN dotnet publish -c Release -o out
