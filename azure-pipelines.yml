@@ -16,7 +16,7 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   containerPath: '/app/test/TestResults'
-  imgName: '$(containerRegistry)/$(imageRepository):latest'
+  imgName: '$(containerRegistry)/$(imageRepository):$(tag)'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
