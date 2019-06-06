@@ -1,13 +1,14 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
-COPY *.* ./
 
-#WORKDIR /app/simplecalc
-#RUN dotnet publish -c Release -o out
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY simplecalc/*.csproj ./simplecalc/
 
-WORKDIR /app/UnitTestProject1
-#RUN dotnet publish -c Release -o out
-RUN dotnet publish UnitTestProject1/UnitTestProject1.csproj
+# copy everything else and build app
+COPY simplecalc/. ./simplecalc/
+WORKDIR /app/simplecalc
+RUN dotnet publish -c Release -o out
 
 #FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS runtime
 #WORKDIR /app
