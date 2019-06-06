@@ -46,8 +46,8 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'docker run --rm -v $(System.DefaultWorkingDirectory):$(containerPath) $(imgName)'
+        script: 'docker run --rm $(imgName)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
-        testResultsFiles: '.*trx'
+        testResultsFiles: '.*.trx'
