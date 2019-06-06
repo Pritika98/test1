@@ -1,12 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
 
-# copy csproj and restore as distinct layers
-COPY *.sln .
-COPY simplecalc/*.csproj ./simplecalc/
+# copy everything to container
+COPY *.* ./
 
-# copy everything else and build app
-COPY simplecalc/. ./simplecalc/
 WORKDIR /app/simplecalc
 RUN dotnet publish -c Release -o out
 
@@ -16,6 +13,6 @@ RUN dotnet publish -c Release -o out
 #ENTRYPOINT ["dotnet", "simplecalc.dll"]
 
 FROM build AS testrunner
-WORKDIR /app/test
-COPY UnitTestProject1/. .
+WORKDIR /app/UnitTestProject1
+#COPY UnitTestProject1/. .
 ENTRYPOINT ["dotnet", "test", "--logger:trx"]
