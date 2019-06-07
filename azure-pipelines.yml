@@ -15,7 +15,7 @@ variables:
   containerRegistry: 'dockerazure.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  containerPath: 'C:\app\test\TestResults'
+  containerPath: '/app/test/TestResults'
   imgName: '$(containerRegistry)/$(imageRepository):$(tag)'
   
   # Agent VM image name
@@ -46,7 +46,7 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'docker run --rm -v $(System.DefaultWorkingDirectory):$(containerPath) $(imgName)'
+        script: 'mkdir TestResults & docker run --rm -v $(System.DefaultWorkingDirectory)\TestResults:$(containerPath) $(imgName)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
