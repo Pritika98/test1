@@ -46,9 +46,7 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'mkdir TestResults
-          cd TestResults
-          docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)'
+        script: 'docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
