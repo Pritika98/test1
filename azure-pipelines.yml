@@ -52,10 +52,7 @@ stages:
         script: 'cd TestResults & docker run --name=testc $(imgName)'
     - task: CmdLine@2
       inputs:
-        script: 'docker ps -aqf "name=testc" > cid.txt'
-    - task: CmdLine@2
-      inputs:
-        script: 'docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults/TestResults'
+        script: 'docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
@@ -63,6 +60,6 @@ stages:
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
     - task: CmdLine@2
       inputs:
-        script: 'cd $(System.DefaultWorkingDirectory)/TestResults/TestResults & dir'
+        script: 'cd $(System.DefaultWorkingDirectory)/TestResults & dir'
 
    
