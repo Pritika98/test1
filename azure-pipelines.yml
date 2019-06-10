@@ -52,13 +52,10 @@ stages:
         script: 'cd TestResults & docker run --name=testc $(imgName)'
     - task: CmdLine@2
       inputs:
-        script: 'docker ps -aqf "name=testc"'
-    - task: CmdLine@2
-      inputs:
         script: 'docker ps -aqf "name=testc" > cid.txt'
     - task: CmdLine@2
       inputs:
-        script: 'set /p VAR1=<cid.txt & docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
+        script: 'docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
