@@ -61,4 +61,8 @@ stages:
         testResultsFormat: 'VSTest'
         testResultsFiles: '.*.trx'
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
+    - task: CmdLine@2
+      inputs:
+        script: 'cd $(System.DefaultWorkingDirectory) & dir'
+
    
