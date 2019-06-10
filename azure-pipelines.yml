@@ -46,12 +46,10 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'mkdir TestResults & docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)'
+        script: 'mkdir TestResults & docker run --name=test $(imgName) & docker ps -aqf "name=test" > b.txt & set /p VAR1=<b.txt & docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '.*.trx'
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
-    - task: CmdLine@2
-      inputs:
-        script: 'cd $(System.DefaultWorkingDirectory)/TestResults & dir '
+   
