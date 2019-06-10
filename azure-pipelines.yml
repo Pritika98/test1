@@ -64,7 +64,7 @@ stages:
         script: 'echo %VAR1%'
     - task: CmdLine@2
       inputs:
-        script: 'type cid.txt'
+        script: 'setx /f cid.txt /x'
     - task: CmdLine@2
       inputs:
         script: 'docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
