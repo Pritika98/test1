@@ -37,7 +37,9 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
     - task: CmdLine@2
       inputs:
-        script: 'docker run --name=testc $(imgName) && docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)'
+        script: |
+          docker run --name=testc $(imgName) 
+          docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
