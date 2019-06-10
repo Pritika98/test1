@@ -58,16 +58,7 @@ stages:
         script: 'docker ps -aqf "name=testc" > cid.txt'
     - task: CmdLine@2
       inputs:
-        script: 'set /p VAR1=<cid.txt'
-    - task: CmdLine@2
-      inputs:
-        script: 'echo %VAR1%'
-    - task: CmdLine@2
-      inputs:
-        script: 'setx /f cid.txt /x'
-    - task: CmdLine@2
-      inputs:
-        script: 'docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
+        script: 'set /p VAR1=<cid.txt & docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
