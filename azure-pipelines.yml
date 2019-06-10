@@ -41,7 +41,7 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
-        testResultsFiles: '.*.trx'
+        testResultsFiles: '*.trx'
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
     - task: CmdLine@2
       inputs:
