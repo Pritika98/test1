@@ -49,7 +49,13 @@ stages:
         script: 'mkdir TestResults'
     - task: CmdLine@2
       inputs:
-        script: 'cd TestResults & docker run --name=testc $(imgName) & docker ps -aqf "name=testc" > cid.txt & set /p VAR1=<cid.txt'
+        script: 'cd TestResults & docker run --name=testc $(imgName)'
+    - task: CmdLine@2
+      inputs:
+        script: 'docker ps -aqf "name=testc" > cid.txt'
+    - task: CmdLine@2
+      inputs:
+        script: 'set /p VAR1=<cid.txt'
     - task: CmdLine@2
       inputs:
         script: 'docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
