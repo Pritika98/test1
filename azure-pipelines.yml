@@ -16,7 +16,7 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   containerPath: '/app/test/TestResults'
-  imgName: 'dockerazure.azurecr.io/cimg:191'
+  imgName: 'dockerazure.azurecr.io/cimage:191'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
