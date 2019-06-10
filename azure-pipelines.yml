@@ -46,7 +46,7 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'mkdir TestResults & type nul > cid.txt & docker run --name=test $(imgName) & docker ps -aqf "name=test" > cid.txt & set /p VAR1=<cid.txt & docker cp %VAR1%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
+        script: 'mkdir TestResults & docker run --name=test $(imgName) & docker ps -aqf "name=test" > cid.txt & set /p PATH=<cid.txt & docker cp %PATH%:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
