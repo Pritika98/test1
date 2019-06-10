@@ -63,6 +63,6 @@ stages:
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
     - task: CmdLine@2
       inputs:
-        script: 'cd $(System.DefaultWorkingDirectory) & dir'
+        script: 'cd $(System.DefaultWorkingDirectory)/TestResults & dir'
 
    
