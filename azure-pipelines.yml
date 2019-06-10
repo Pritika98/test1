@@ -55,7 +55,7 @@ stages:
         script: 'docker ps -aqf "name=testc" > cid.txt'
     - task: CmdLine@2
       inputs:
-        script: 'docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults'
+        script: 'docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)/TestResults/TestResults'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
@@ -63,6 +63,6 @@ stages:
         searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
     - task: CmdLine@2
       inputs:
-        script: 'cd $(System.DefaultWorkingDirectory)/TestResults & dir'
+        script: 'cd $(System.DefaultWorkingDirectory)/TestResults/TestResults & dir'
 
    
