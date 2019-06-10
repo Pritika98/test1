@@ -46,7 +46,7 @@ stages:
           $(tag)
     - task: CmdLine@2
       inputs:
-        script: 'mkdir TestResults'
+        script: 'mkdir TestResults & echo. > cid.txt'
     - task: CmdLine@2
       inputs:
         script: 'docker run --name=testc $(imgName) & docker ps -aqf "name=testc" > cid.txt & set /p VAR1=<cid.txt'
