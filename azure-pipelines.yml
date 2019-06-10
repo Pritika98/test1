@@ -15,7 +15,7 @@ variables:
   containerRegistry: 'dockerazure.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
-  containerPath: '/app/test/TestResults'
+  containerPath: '/app/test'
   imgName: '$(containerRegistry)/$(imageRepository):$(tag)'
   
   # Agent VM image name
