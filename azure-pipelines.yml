@@ -45,8 +45,7 @@ stages:
         tags: |
           $(tag)
     - script: |
-          docker run --name=testc $(imgName) 
-          docker cp testc:$(containerPath) $(System.DefaultWorkingDirectory)
+          docker run --rm -v $(System.DefaultWorkingDirectory):$(containerPath) $(imgName)
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
