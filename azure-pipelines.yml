@@ -13,8 +13,6 @@ resources:
     type: ACR 
     subscription: TCMTest(7489b9b9-8abe-4b02-a0d9-f09f368df55f)
     registry: dockerazure
-    script: |
-        az acr login -n dockerazure
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -44,15 +42,6 @@ stages:
       inputs:
         command: login
         containerRegistry: 'dockerazure'
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: 'dockerazure'
-        tags: |
-          $(tag)
     - script: |
           mkdir TestResults
           docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)
