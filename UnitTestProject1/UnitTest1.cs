@@ -41,7 +41,7 @@ namespace UnitTestProject1
         {
             int a = 6;
             int b = 3;
-            int ex = 2;
+            int ex = 4;
             int r = p.Div(a, b);
             Assert.AreEqual(r, ex);
         }
