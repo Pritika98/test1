@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  #dockerRegistryServiceConnection: '0e17cdb1-fb53-4f4b-b64a-8c76b58bd9f4'
+  dockerRegistryServiceConnection: '0e17cdb1-fb53-4f4b-b64a-8c76b58bd9f4'
   imageRepository: 'cimage'
   containerRegistry: 'dockerazure.azurecr.io'
   dockerfilePath: '**/Dockerfile'
@@ -34,14 +34,14 @@ stages:
       displayName: Login to ACR
       inputs:
         command: login
-        containerRegistry: 'dockerazure'
+        containerRegistry: $(dockerRegistryServiceConnection)
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: 'dockerazure'
+        containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
     - script: |
