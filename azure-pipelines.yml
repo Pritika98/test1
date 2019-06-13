@@ -6,9 +6,9 @@ trigger:
 - master
 
 resources:
-- repo: self
- containers:
-   - container: linux
+#- repo: self
+  containers:
+  - container: linux
     image: dockerazure.azurecr.io/cimage:439
 
 variables:
