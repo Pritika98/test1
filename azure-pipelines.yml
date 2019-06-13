@@ -13,6 +13,8 @@ resources:
     type: ACR 
     subscription: TCMTest(7489b9b9-8abe-4b02-a0d9-f09f368df55f)
     registry: dockerazure
+    script: |
+        az acr login -n dockerazure
 
 variables:
   # Container registry service connection established during pipeline creation
