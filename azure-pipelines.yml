@@ -47,6 +47,7 @@ stages:
     - script: |
           mkdir TestResults
           docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)
+      continueOnError: true
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'VSTest'
