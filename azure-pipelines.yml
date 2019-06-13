@@ -7,6 +7,9 @@ trigger:
 
 resources:
 - repo: self
+ containers:
+   - container: linux
+    image: dockerazure.azurecr.io/cimage:439
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -24,7 +27,11 @@ variables:
 stages:
 - stage: Build
   displayName: Build and push stage
-  jobs:  
+  jobs:
+   job: build_linux
+    pool:
+      vmImage: 'ubuntu-16.04'
+    container: linux
   - job: Build
     displayName: Build job
     pool:
