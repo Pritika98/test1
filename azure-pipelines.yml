@@ -10,6 +10,9 @@ resources:
   containers:
   - container: linux
     image: dockerazure.azurecr.io/cimage:439
+    type: ACR 
+    subscription: dockerazure
+    registry: dockerazure
 
 variables:
   # Container registry service connection established during pipeline creation
