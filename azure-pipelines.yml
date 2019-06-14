@@ -5,16 +5,6 @@
 trigger:
 - master
 
-resources:
-#- repo: self
-#  containers:
-#  - container: linux
-#    image: dockerazure.azurecr.io/cimage:439
-#    type: ACR
-#    endpoint: dockerazure
-#    subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
-#    registry: dockerazure
-
 variables:
   # Container registry service connection established during pipeline creation
   #dockerRegistryServiceConnection: '0e17cdb1-fb53-4f4b-b64a-8c76b58bd9f4'
@@ -27,13 +17,21 @@ variables:
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
+  
+resources:
+#- repo: self
+  containers:
+  - container: linux
+    image: dockerazure.azurecr.io/cimage:439
+    type: ACR
+    endpoint: dockerazure
+    subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
+    registry: dockerazure
+    
 pool:
-      vmImage: $(vmImageName)
+  vmImage: 'ubuntu-latest'
 
-container:
-  image: dockerazure.azurecr.io/cimage:439
-  endpoint: dockerazure
+container: my_container
 
 steps:
 - script: |
@@ -45,6 +43,10 @@ steps:
     testResultsFormat: 'VSTest'
     testResultsFiles: '*.trx'
     searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
+
+
+
+
 
 
    
