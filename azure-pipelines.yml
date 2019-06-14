@@ -5,6 +5,12 @@
 trigger:
 - master
 
+steps:
+- task: Docker@2
+    inputs:
+     containerRegistry: 'dockerazure'
+    command: 'login'
+    
 resources:
 #- repo: self
   containers:
