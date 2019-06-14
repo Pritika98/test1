@@ -10,6 +10,7 @@ resources:
   containers:
   - container: linux
     type: ACR
+    endpoint: dockerazure
     subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
     registry: dockerazure
     image: cimage
@@ -42,14 +43,6 @@ stages:
       inputs:
         command: login
         containerRegistry: 'dockerazure'
-    - task: Docker@0
-      displayName: 'Run image'
-      inputs:
-        containerRegistryType: 'Container Registry'
-        action: 'Run an image'
-        imageName: 'dockerazure.azurecr.io/cimage:439'
-        containerCommand: 'docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)'
-        detached: false
     - script: |
           mkdir TestResults
           docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)
