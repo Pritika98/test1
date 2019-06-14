@@ -7,6 +7,12 @@ trigger:
 
 resources:
 - repo: self
+  containers:
+  - container: petStore
+    type: ACR
+    subscription: jPetsAzureSubscription 
+    registry: myDockerRegistry
+    image: jPetStoreImage
 
 variables:
   # Container registry service connection established during pipeline creation
