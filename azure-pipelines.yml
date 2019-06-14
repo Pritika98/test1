@@ -7,13 +7,13 @@ trigger:
 
 resources:
 #- repo: self
-  containers:
-  - container: linux
-    image: dockerazure.azurecr.io/cimage:439
-    type: ACR
-    endpoint: dockerazure
-    subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
-    registry: dockerazure
+#  containers:
+#  - container: linux
+#    image: dockerazure.azurecr.io/cimage:439
+#    type: ACR
+#    endpoint: dockerazure
+#    subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
+#    registry: dockerazure
 
 variables:
   # Container registry service connection established during pipeline creation
@@ -28,25 +28,23 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool:
+pool:
       vmImage: $(vmImageName)
-    container: linux
-    steps:
-    - script: |
-          mkdir TestResults
-          docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)
-      continueOnError: true
-    - task: PublishTestResults@2
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '*.trx'
-        searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
+
+container:
+  image: dockerazure.azurecr.io/cimage:439
+  endpoint: dockerazure
+
+steps:
+- script: |
+      mkdir TestResults
+      docker run --rm -v $(System.DefaultWorkingDirectory)/TestResults:$(containerPath) $(imgName)
+  continueOnError: true
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '*.trx'
+    searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
 
 
    
