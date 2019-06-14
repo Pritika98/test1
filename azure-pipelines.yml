@@ -48,7 +48,7 @@ stages:
         command: buildAndPush
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: 'dcokerazure'
+        containerRegistry: 'dockerazure'
         tags: |
           $(tag)
     - script: |
