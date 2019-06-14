@@ -6,13 +6,13 @@ trigger:
 - master
 
 resources:
-- repo: self
+#- repo: self
   containers:
   - container: petStore
     type: ACR
-    subscription: jPetsAzureSubscription 
-    registry: myDockerRegistry
-    image: jPetStoreImage
+    subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
+    registry: dockerazure
+    image: cimage
 
 variables:
   # Container registry service connection established during pipeline creation
