@@ -8,7 +8,7 @@ trigger:
 resources:
 #- repo: self
   containers:
-  - container: petStore
+  - container: linux
     type: ACR
     subscription: 7489b9b9-8abe-4b02-a0d9-f09f368df55f 
     registry: dockerazure
