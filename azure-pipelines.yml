@@ -38,9 +38,9 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
-stages:
-- stage: Build
-  displayName: Build and push stage
+#stages:
+#- stage: Build
+ # displayName: Build and push stage
   jobs:  
   - job: Build
     displayName: Build job
